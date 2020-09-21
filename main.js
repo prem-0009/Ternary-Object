@@ -77,14 +77,14 @@ let arr2 = [];
 let arr3 = [];
 const four = arr.map((item) =>
   item > 50
-    ? arr1.push(Math.round(item))    : 
-    item < 50 && typeof item === "number"
-    ? arr2.push(item.toString().split('').splice(0,5).join('')) //????????????????? need to put 2 digit after decimal
+    ? arr1.push(Math.round(item))
+    : item < 50 && typeof item === "number"
+    ? arr2.push(Math.trunc(item * 100) / 100)
     : typeof item === "string"
     ? arr3.push(item)
     : "hello"
 );
-// item !== undefined && item !== null && item !== NaN
+
 console.log("four: \n", arr1, arr2, arr3, "\n\n");
 
 // Object Methods:
@@ -109,16 +109,16 @@ const priceEntries = Object.entries(prices).map((item, i, arr) => {
   if (typeof item[1] === "object") {
     let hi = {};
 
-    const newSubObj = Object.entries(item[1]).map((element, i, newArr) => {
+    Object.entries(item[1]).map((element, i, newArr) => {
       element[1] *= 2;
-      hi[element[0]] = element[1];//creating an object is the goal.
-      return ;//doesn't matter the outcome
+      hi[element[0]] = element[1]; //creating an object is the goal.
+      return; //doesn't matter the outcome
     });
     // console.log({[item[0]]:hi})
-    console.log([item[0], hi])
-    return [item[0], hi];//returning an array with an obj inside
+    console.log([item[0], hi]);
+    return [item[0], hi]; //returning an array with an obj inside
   }
-  //hard coding 
+  //hard coding
   // if (typeof item[1] === "object") {
   //   item[1].lg *= 2;
   //   item[1].sm *= 2;
@@ -129,4 +129,3 @@ const priceEntries = Object.entries(prices).map((item, i, arr) => {
 
 const newObj = Object.fromEntries(priceEntries);
 console.log("\n\nfive:\n", newObj);
-
